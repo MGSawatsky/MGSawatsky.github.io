@@ -1,0 +1,87 @@
+
+body {
+	background-color: lightgrey;
+	background-image: url("http://blog.hostbaby.com/wp-content/uploads/2014/03/Trees_1920x1234.png");
+}
+header {
+	text-align: center;
+}
+p {
+	text-align: center;
+	margin-right: 15%;
+	margin-left: 15%;
+}
+table {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	border-collapse: collapse;
+	border: 1px solid black;
+
+}
+tr {
+	height: auto;
+	width: auto;
+	/* border-bottom: 1px solid black; */
+}
+tr:nth-child(even){
+	background-color: lightgrey;
+	opacity: 10%;
+}
+th {
+	height: auto;
+	width: auto;
+}
+.top-row table, .top-row tr, .top-row th {
+	border: 1px solid black;
+	border-collapse: collapse;
+	width: 30%;
+}
+.photo-table {
+	background-color: none;
+	border: 0px;
+	border-collapse: collapse;
+}
+.photo-class {
+	display: inline-block;
+	width: auto;
+	height: auto;
+	opacity: 0.7;
+}
+.photo-class:hover{
+	opacity: 1.0;
+}
+.navigation-row a:link, a:visited{
+	background-color: transparent;
+	color: black;
+	border: 3px solid lightblue;
+	margin-right: 5px;
+	margin-left: 5px;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+.navigation-row a:hover, a:active{
+	background-color: lightblue;
+	color: black;
+	text-decoration: none;
+}
+.banner-class {
+	padding-top: 50px;
+	text-align: center;
+}
+
+#youtube-link {
+	display: block;
+	margin: 0px auto;
+	width: 40px;
+	height: 40px;
+	
+}
+#reddit-link{
+	display: block;
+	margin: 0px auto;
+	width: 40px;
+	height: 40px;
+}
