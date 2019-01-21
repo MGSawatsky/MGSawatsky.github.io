@@ -32,10 +32,27 @@ th {
 	height: auto;
 	width: auto;
 }
+.header-class {
+	background-color: ;
+	background-image: url("https://cdn.pixabay.com/photo/2017/03/14/16/39/banner-2143661_960_720.jpg");
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 25px;
+	background: rgb(204, 204, 204); /*for older browser*/
+	background: rgba(204, 204, 204, 0.4);
+}
 .top-row table, .top-row tr, .top-row th {
 	border: 1px solid black;
 	border-collapse: collapse;
 	width: 30%;
+}
+.food-photo{
+	width: 700px;
+	height: 400px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	
 }
 .photo-table {
 	background-color: none;
