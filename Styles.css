@@ -46,27 +46,29 @@ th {
 	border-collapse: collapse;
 	width: 30%;
 }
+.food-link{
+	width: 500px;
+	height: 250px;
+	display: inline-block;
+	opacity: 0.7;
+}
+.food-link:hover{
+	opacity: 1.0;
+}
 .food-photo{
 	width: 700px;
 	height: 400px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-
 }
 .homepage-table {
 	background-color: none;
 	border: 0px;
 	border-collapse: collapse;
-}
-.photo-class {
-	display: inline-block;
-	width: auto;
-	height: auto;
-	opacity: 0.7;
-}
-.photo-class:hover{
-	opacity: 1.0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50px;
 }
 .navigation-row a:link, a:visited{
 	background-color: transparent;
