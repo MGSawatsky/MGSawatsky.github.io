@@ -17,7 +17,6 @@ table {
 	text-align: center;
 	border-collapse: collapse;
 	border: 1px solid black;
-
 }
 tr {
 	height: auto;
@@ -47,8 +46,8 @@ th {
 	width: 30%;
 }
 .food-link{
-	width: 500px;
-	height: 250px;
+	width: 300px;
+	height: 175px;
 	display: inline-block;
 	opacity: 0.7;
 }
@@ -62,13 +61,14 @@ th {
 	margin-left: auto;
 	margin-right: auto;
 }
-.homepage-table {
+.homepage-table{
 	background-color: none;
 	border: 0px;
 	border-collapse: collapse;
 	margin-left: auto;
 	margin-right: auto;
-	width: 50px;
+	table-layout: auto;
+	width: 50%;
 }
 .navigation-row a:link, a:visited{
 	background-color: transparent;
