@@ -52,9 +52,9 @@ th {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	
+
 }
-.photo-table {
+.homepage-table {
 	background-color: none;
 	border: 0px;
 	border-collapse: collapse;
@@ -87,18 +87,4 @@ th {
 .banner-class {
 	padding-top: 50px;
 	text-align: center;
-}
-
-#youtube-link {
-	display: block;
-	margin: 0px auto;
-	width: 40px;
-	height: 40px;
-	
-}
-#reddit-link{
-	display: block;
-	margin: 0px auto;
-	width: 40px;
-	height: 40px;
 }
