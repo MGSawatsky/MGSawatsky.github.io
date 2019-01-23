@@ -1,4 +1,5 @@
 
+@import url("https://fonts.googleapis.com/css?family=Berkshire Swash");
 body {
 	background-color: lightgrey;
 	background-image: url("http://blog.hostbaby.com/wp-content/uploads/2014/03/Trees_1920x1234.png");
@@ -40,10 +41,20 @@ th {
 	background: rgb(204, 204, 204); /*for older browser*/
 	background: rgba(204, 204, 204, 0.4);
 }
-.top-row table, .top-row tr, .top-row th {
+.top-row table, .top-row tr, .top-row th, .top-row a:visited{
 	border: 1px solid black;
 	border-collapse: collapse;
 	width: 30%;
+}
+.top-row a:visited, .top-row a:link{
+	text-align: center;
+	text-decoration: none;
+	color: #146aba;
+	font-family: "Berkshire Swash";
+	font-size: 24px;
+}
+.top-row a:hover{
+	text-shadow:0 0 5px #35ccff;
 }
 .food-link{
 	width: 300px;
@@ -69,6 +80,12 @@ th {
 	margin-right: auto;
 	table-layout: auto;
 	width: 50%;
+}
+.directory-class {
+	text-align: center;
+	text-decoration: underline;
+	color: red;
+	font-family: "comic sans", sans-serif;
 }
 .navigation-row a:link, a:visited{
 	background-color: transparent;
