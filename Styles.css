@@ -129,18 +129,21 @@ ul.list-link-class{
 	margin-top: 50px;
 }
 .list-link-class{
-	text-decoration: underline;
+	text-decoration: none;
 	text-align: center;
 	padding-bottom: 100px;
 	padding-right: 50px;
 }
-
-.list-link-class a:link{
-	color: #000000;
+.list-link-class a:link, .list-link-class a:visited{
+	color: #2b423f;
 	font-family: "Berkshire Swash";
 	text-decoration: none;
 	font-size: 30px;
 	text-shadow:0 0 1px #ffffff;
+	line-height: 40px;
+}
+.list-link-class a:hover{
+	text-decoration: underline;
 }
 .list-section{
 	padding-left: 550px;
