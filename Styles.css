@@ -146,8 +146,8 @@ ul.list-link-class{
 	text-decoration: underline;
 }
 .list-section{
-	padding-left: 550px;
-	padding-right: 550px;
+	padding-left: 30%;
+	padding-right: 30%;
 }
 ul.list-class{
 	font-family: Verdana, Geneva, sans-serif;
