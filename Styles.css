@@ -5,6 +5,8 @@ body {
 	background-image: url("http://blog.hostbaby.com/wp-content/uploads/2014/03/Trees_1920x1234.png");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
 }
 header {
 	text-align: center;
