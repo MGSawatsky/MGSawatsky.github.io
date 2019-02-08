@@ -1,11 +1,16 @@
 
-const calculator = document.querySelector(‘.calculator’)
-const keys = calculator.querySelector(‘.calculator__keys’)
-const key = e.target
-const action = key.dataset.action
+const calculator = document.getElementByClass('.Calculator-Class');
+const keys = calculator.querySelector('.Calculator-Body');
 
-keys.addEventListener(‘click’, e => {
- if (e.target.matches(‘button’)) {
-   // Do something
+keys.addEventListener('click', e => {
+ if (e.target.matches('button')) {
+   const key = e.target
+   const action = key.dataset.action
+
+   if (
+     action==='add' || action==='subtract' || action==='multiply' || action==='divide'
+   ) {
+     console.log('key')
+   }
  }
 })

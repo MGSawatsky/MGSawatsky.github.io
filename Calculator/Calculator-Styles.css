@@ -13,12 +13,16 @@ table, tb, th{
   border-color: black;
   border-style: solid;
   width: auto;
-  height: auto;
+  height: 100%;
   text-align: center;
   display: inline-block;
 }
 .Calculator-Display{
   height: 50px;
+  width: 100%;
+  border-color: black;
+  border-width: thin;
+  border-style: solid;
 }
 .Calculator-Body table, .Calculator-Body tb, .Calculator-Body th{
   border-style: solid;
@@ -26,6 +30,8 @@ table, tb, th{
   border-collapse: collapse;
   border-color: black;
   font-size: 12px;
+  width: auto;
+  height: 100%;
 }
 button{
   font-size: 20px;
