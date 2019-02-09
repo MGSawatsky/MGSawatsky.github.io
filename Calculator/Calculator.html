@@ -4,47 +4,49 @@
    <head>
       <title>Calculator</title>
       <link rel="stylesheet" type="text/css" href="Calculator-Styles.css">
-      <script src="Calculator-Code.js"></script>
    </head>
    <body>
       <div class="Calculator-Class">
-        <div class="Calculator-Display">
-          <p id='display'>0</p>
+        <div>
+          <input type="text" class="Calculator-Display" value="" disabled></input>
         </div>
+
         <div class="Calculator-Body">
           <table>
               <tr>
-                <th><button type="button" data-action="left-bracket">(</button></th>
-                <th><button type="button" data-action="right-bracket">)</button></th>
-                <th><button type="button" data-action="clear">AC</button></th>
+                <th><button type="button" class="bracket" value="(">(</button></th>
+                <th><button type="button" class="bracket" value=")">)</button></th>
+                <th><button type="button" class="clear">AC</button></th>
                 <th></th>
               </tr>
               <tr>
-                <th><button type="button" data-action="seven">7</button></th>
-                <th><button type="button" data-action="eight">8</button></th>
-                <th><button type="button" data-action="nine">9</button></th>
-                <th><button type="button" data-action="divide">/</button></th>
+                <th><button type="button" value="7">7</button></th>
+                <th><button type="button" value="8">8</button></th>
+                <th><button type="button" value="9">9</button></th>
+                <th><button type="button" class="operator" value="/">/</button></th>
               </tr>
               <tr>
-                <th><button type="button" data-action="four">4</button></th>
-                <th><button type="button" data-action="five">5</button></th>
-                <th><button type="button" data-action="six">6</button></th>
-                <th><button type="button" data-action="multiply">*</button></th>
+                <th><button type="button" value="4">4</button></th>
+                <th><button type="button" value="5">5</button></th>
+                <th><button type="button" value="6">6</button></th>
+                <th><button type="button" class="operator" value="*">*</button></th>
               </tr>
               <tr>
-                <th><button type="button" data-action="one">1</button></th>
-                <th><button type="button" data-action="two">2</button></th>
-                <th><button type="button" data-action="three">3</button></th>
-                <th><button type="button" data-action="subtract">-</button></th>
+                <th><button type="button" value="1">1</button></th>
+                <th><button type="button" value="2">2</button></th>
+                <th><button type="button" value="3">3</button></th>
+                <th><button type="button" class="operator" value="-">-</button></th>
               </tr>
               <tr>
-                <th><button type="button" data-action="zero">0</button></th>
-                <th><button type="button" data-action="decimal">.</button></th>
-                <th><button type="button" data-action="equal">=</button></th>
-                <th><button type="button" data-action="add">+</button></th>
+                <th><button type="button" value="0">0</button></th>
+                <th><button type="button" class="decimal" value=".">.</button></th>
+                <th><button type="button" class="equals" value="=">=</button></th>
+                <th><button type="button" class="operator" value="+">+</button></th>
               </tr>
           </table>
         </div>
       </div>
+
    </body>
+   <script src="Calculator-Code.js"></script>
 </html>
