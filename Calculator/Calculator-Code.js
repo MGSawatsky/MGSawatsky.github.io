@@ -1,6 +1,7 @@
 
-const calculator = document.getElementByClass('.Calculator-Class');
-const keys = calculator.querySelector('.Calculator-Body');
+const calculator = document.querySelector('Calculator-Class');
+//var display = document.getElementById('display')
+const keys = calculator.querySelector('Calculator-Body');
 
 keys.addEventListener('click', e => {
  if (e.target.matches('button')) {

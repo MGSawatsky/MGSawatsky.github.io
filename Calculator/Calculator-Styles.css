@@ -23,6 +23,9 @@ table, tb, th{
   border-color: black;
   border-width: thin;
   border-style: solid;
+  text-align: right;
+  font-size: 30px;
+  padding-bottom: 10px;
 }
 .Calculator-Body table, .Calculator-Body tb, .Calculator-Body th{
   border-style: solid;
