@@ -14,7 +14,7 @@ function updateDisplay(){
 
 updateDisplay();
 
-function numberFunction(number){
+function generalFunction(number){
   //Makes it function as you would normally expect
   if(calculator.firstPress){
     calculator.currentString = number;
@@ -55,19 +55,18 @@ buttons.addEventListener('click', (event) => {
   const {target} = event;
 
   if(!target.matches('button')){
-    console.log("not clicking a button")
     return;
   }
   else if(target.classList.contains('clear')){
-    //do clear function
+    //resets calculator
     clearFunction();
   }
   else if(target.classList.contains('equals')){
-    //do equals function
+    //attempts to evaluate the expression
     equalsFunction();
   }
   else{
-    numberFunction(target.value);
-    //must be a number
+    //general function for building an expression
+    generalFunction(target.value);
   }
 })
