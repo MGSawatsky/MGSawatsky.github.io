@@ -33,7 +33,11 @@ function clearFunction(){
   calculator.firstPress = true;
   updateDisplay();
 }
-
+function deleteFunction(){
+  calculator.currentString = calculator.currentString.slice(0, -1);
+  calculator.currentDisplay = calculator.currentString;
+  updateDisplay();
+}
 function equalsFunction(){
   try{
     calculator.currentDisplay = eval(calculator.currentString);
@@ -64,6 +68,9 @@ buttons.addEventListener('click', (event) => {
   else if(target.classList.contains('equals')){
     //attempts to evaluate the expression
     equalsFunction();
+  }
+  else if(target.classList.contains('delete')){
+    deleteFunction();
   }
   else{
     //general function for building an expression
