@@ -3,48 +3,49 @@
 <html>
    <head>
       <title>Calculator</title>
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" type="text/css" href="Calculator-Styles.css">
    </head>
    <body>
-      <div class="Calculator-Class">
+      <div class="Calculator-Class" class="container">
         <div>
           <input type="text" class="Calculator-Display" value="" disabled></input>
         </div>
 
         <div class="Calculator-Body">
-          <table>
-              <tr>
-                <th><button type="button" value="(">(</button></th>
-                <th><button type="button" value=")">)</button></th>
-                <th><button type="button" class="clear">AC</button></th>
-                <th></th>
-              </tr>
-              <tr>
-                <th><button type="button" value="7">7</button></th>
-                <th><button type="button" value="8">8</button></th>
-                <th><button type="button" value="9">9</button></th>
-                <th><button type="button" value="/">/</button></th>
-              </tr>
-              <tr>
-                <th><button type="button" value="4">4</button></th>
-                <th><button type="button" value="5">5</button></th>
-                <th><button type="button" value="6">6</button></th>
-                <th><button type="button" value="*">*</button></th>
-              </tr>
-              <tr>
-                <th><button type="button" value="1">1</button></th>
-                <th><button type="button" value="2">2</button></th>
-                <th><button type="button" value="3">3</button></th>
-                <th><button type="button" value="-">-</button></th>
-              </tr>
-              <tr>
-                <th><button type="button" value="0">0</button></th>
-                <th><button type="button" value=".">.</button></th>
-                <th><button type="button" class="equals" value="=">=</button></th>
-                <th><button type="button"" value="+">+</button></th>
-              </tr>
-          </table>
+        <div class="row">
+              <button type="button" value="(" class="col-2">(</button>
+              <button type="button" value=")" class="col-2">)</button>
+              <button type="button" class="col-4" class="clear">AC</button>
         </div>
+        <div class="row">
+              <button type="button" value="7" class="col-2">7</button>
+              <button type="button" value="8" class="col-2">8</button>
+              <button type="button" value="9" class="col-2">9</button>
+              <button type="button" value="/" class="col-2">/</button>
+        </div>
+        <div class="row">
+              <button type="button" value="4" class="col-2">4</button>
+              <button type="button" value="5" class="col-2">5</button>
+              <button type="button" value="6" class="col-2">6</button>
+              <button type="button" value="*" class="col-2">*</button>
+        </div>
+        <div class="row">
+              <button type="button" value="1" class="col-2">1</button>
+              <button type="button" value="2" class="col-2">2</button>
+              <button type="button" value="3" class="col-2">3</button>
+              <button type="button" value="-" class="col-2">-</button>
+        </div>
+        <div class="row">
+              <button type="button" value="0" class="col-2">0</button>
+              <button type="button" value="." class="col-2">.</button>
+              <button type="button" class="col-2" class="equals" value="=">=</button>
+              <button type="button" value="+" class="col-2">+</button>
+        </div>
+      </div>
+
       </div>
 
    </body>

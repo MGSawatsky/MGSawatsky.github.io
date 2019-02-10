@@ -57,7 +57,7 @@ buttons.addEventListener('click', (event) => {
   if(!target.matches('button')){
     return;
   }
-  else if(target.classList.contains('clear')){
+  else if(target.classList.contains('col-4')){
     //resets calculator
     clearFunction();
   }
