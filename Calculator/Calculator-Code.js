@@ -3,6 +3,7 @@ const calculator = {
   currentDisplay: '0',
   currentString: "0",
   firstPress: true,
+  expressionString: "",
 };
 
 const buttons = document.querySelector('.Calculator-Body');
@@ -13,6 +14,11 @@ function updateDisplay(){
 }
 
 updateDisplay();
+
+function updateExpressionDisplay(){
+  const display = document.querySelector('.Display-Box');
+  display.value = calculator.expressionString;
+}
 
 function generalFunction(number){
   //Makes it function as you would normally expect
@@ -52,6 +58,8 @@ function equalsFunction(){
     calculator.firstPress = true;
   }
   updateDisplay();
+  calculator.expressionString = calculator.currentString + "=" + calculator.currentDisplay;
+  updateExpressionDisplay();
   calculator.currentString = calculator.currentDisplay;
 }
 

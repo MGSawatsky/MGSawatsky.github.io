@@ -3,14 +3,21 @@ body{
   text-align: center;
 }
 .Calculator-Class {
-  width: 600px;
+  width: 100%;
   height: 100%;
   text-align: left;
   display: inline-block;
 }
+.Display-Box{
+  width: 100%;
+  height: 20px;
+  font-size: 12px;
+  text-align: right;
+  border-style: none;
+}
 .Calculator-Display{
   height: 50px;
-  width: 430px;
+  width: 100%;
   border-color: black;
   border-width: thin;
   border-style: solid;
@@ -21,7 +28,6 @@ body{
 }
 .Calculator-Body {
   text-align: center;
-  display: grid;
   width: 100%;
   height: 100%;
   margin-left: 10px;
@@ -41,7 +47,7 @@ button{
 }
 button:hover{opacity: 1;}
 
-.col-2, .col-4 {
+.col-2, .button-box{
   margin-top: 10px;
   margin-left: 2px;
   margin-right: 2px;
@@ -51,8 +57,9 @@ button:hover{opacity: 1;}
   border-color: black;
   border-radius: 5px;
   opacity: 0.9;
+  width: 23.6%;
 }
-.col-2:hover, .col-4:hover{opacity: 1;}
+.col-2:hover, .button-box:hover{opacity: 1;}
 
 @media handheld {
     .container{
