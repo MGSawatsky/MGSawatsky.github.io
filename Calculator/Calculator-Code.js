@@ -48,7 +48,8 @@ function equalsFunction(){
   try{
     calculator.currentDisplay = eval(calculator.currentString);
     console.log(calculator.currentDisplay);
-    if(calculator.currentDisplay=='NaN' || calculator.currentDisplay=="undefined" ||  calculator.currentDisplay=="Infinity" || calculator.currentDisplay=="function Error() { [native code] }"){
+    //Makes an error message you can get look better. 
+    if(calculator.currentDisplay=="function Error() { [native code] }"){
       throw "err";
     }
   }
