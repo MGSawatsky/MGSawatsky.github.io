@@ -37,7 +37,9 @@ function clearFunction(){
   calculator.currentString ="0";
   calculator.currentDisplay = '0';
   calculator.firstPress = true;
+  calculator.expressionString = "";
   updateDisplay();
+  updateExpressionDisplay();
 }
 function deleteFunction(){
   calculator.currentString = calculator.currentString.slice(0, -1);
@@ -48,7 +50,7 @@ function equalsFunction(){
   try{
     calculator.currentDisplay = eval(calculator.currentString);
     console.log(calculator.currentDisplay);
-    //Makes an error message you can get look better. 
+    //Makes an error message you can get look better.
     if(calculator.currentDisplay=="function Error() { [native code] }"){
       throw "err";
     }
