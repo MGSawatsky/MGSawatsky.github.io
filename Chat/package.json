@@ -1,0 +1,7 @@
+
+{
+  "name": "chat-socket",
+  "verison": "1.0",
+  "description": "chat socket.io app",
+  "dependecies": {}
+}
