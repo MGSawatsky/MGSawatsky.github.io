@@ -12,12 +12,12 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
-});
+// app.get('/', function(req, res){
+//   res.sendFile(__dirname + '/index.html');
+// });
 
-// var htmlPath = path.join(__dirname);
-// app.use(express.static(htmlPath));
+var htmlPath = path.join(__dirname);
+app.use(express.static(htmlPath));
 
 
 // var nodePath = path.join(__dirname, "node_modules/socket.io/socket.io.js");
@@ -29,8 +29,6 @@ io.on('connection', function(socket){
   });
 });
 
-var server = app.listen(3000, function () {
-  var host = 'localhost';
-  var port = server.address().port;
-  console.log('listening on http://'+host+':'+port+'/');
+http.listen(port, function(){
+  console.log('listening on *:' + port);
 });
