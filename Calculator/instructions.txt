@@ -1,0 +1,6 @@
+
+URL of website: https://mgsawatsky.github.io/Calculator/Calculator.html
+
+Browsers Tested on: Chrome, Safari (iPhone),
+
+How to deploy calculator: You load the webpage and can use it freely. 
