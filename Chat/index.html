@@ -2,26 +2,48 @@
 <html>
   <head>
     <title>Chat</title>
-    <link rel="stylesheet" href="ChatStyles.css"></link>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
       form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
       form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
       form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; display: flex; flex-direction: column-reverse;}
+      #messages { list-style-type: none; margin: 0; padding: 0;}
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
     </style>
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <!--Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="ChatStyles.css"></link>
   </head>
   <body>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+    <div class="wrapper">
+      <div id="sidebar">
+        <p>USERS</p>
+        <ul id="users"></ul>
+      </div>
+      <div class="container-fluid" id="message-board">
+        <p>You are <p id="username"></p></p>
+        <ul id="messages"></ul>
+      </div>
+      <div id="send-box">
+        <form action="">
+          <input id="m" autocomplete="off" /><button>Send</button>
+        </form>
+      </div>
+    </div>
 
+<<<<<<< HEAD:Chat/Chat.html
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+=======
+    <!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+>>>>>>> 73d65e677def16cfce50685825a51b47b76f50fb:Chat/index.html
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="ChatScript.js"></script>
+    <script>
+    </script>
     <script>
       $(function () {
         var socket = io();
