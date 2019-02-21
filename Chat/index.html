@@ -38,19 +38,18 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script type="text/javascript" src="ChatScript.js"></script>
-
+    <script>
+    </script>
     <script>
       $(function () {
         var socket = io();
         $('form').submit(function(e){
           e.preventDefault(); // prevents page reloading
-          console.log("no exexution?");
           socket.emit('chat message', $('#m').val());
           $('#m').val('');
           return false;
         });
         socket.on('chat message', function(msg){
-          console.log("no msg?> ");
           $('#messages').append($('<li>').text(msg));
         });
       });

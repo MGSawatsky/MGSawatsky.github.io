@@ -3,6 +3,7 @@
   "verison": "1.0",
   "description": "chat socket.io app",
   "dependencies": {
+    "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
     "socket.io": "^2.2.0"
   },
