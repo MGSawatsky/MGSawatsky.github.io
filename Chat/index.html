@@ -34,12 +34,8 @@
       </div>
     </div>
 
-<<<<<<< HEAD:Chat/Chat.html
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-=======
-    <!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
->>>>>>> 73d65e677def16cfce50685825a51b47b76f50fb:Chat/index.html
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script> -->
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script type="text/javascript" src="ChatScript.js"></script>
     <script>
@@ -54,7 +50,8 @@
           return false;
         });
         socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg));
+          var timestamp = get('timestamp');
+          $('#messages').append($('<li>').text("["+timestamp+ "] " +msg));
         });
       });
     </script>
