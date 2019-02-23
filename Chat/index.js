@@ -55,7 +55,7 @@ io.on('connection', function(socket){
     console.log("Sending for userlist");
   });
   //Sends message to all users with a timestamp
-  socket.on('chat message', function(msg, givenUsername, color){
+  socket.on('chat message', function(msg, givenUsername, givenColor){
     var timestamp = get('timestamp');
     if(msg.substring(0,10) == "/nickcolor"){
       console.log("colour");
@@ -79,7 +79,7 @@ io.on('connection', function(socket){
       });
     }
       else{
-        io.emit('chat message', "["+timestamp+"] "+givenUsername+": "+msg);
+        io.emit('chat message', "["+timestamp+"] "+givenUsername+": "+msg, givenUsername, givenColor);
       }
   });
 });
