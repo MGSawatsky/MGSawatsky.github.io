@@ -45,9 +45,24 @@ io.on('connection', function(socket){
   });
   //Sends message to all users with a timestamp
   socket.on('chat message', function(msg){
-    console.log("chat");
     var timestamp = get('timestamp');
-    io.emit('chat message', "["+timestamp+"] "+msg);
+    if(msg.substring(0,10) == "/nickcolor"){
+      console.log("colour");
+      console.log(msg.substring(11));
+    }
+    else if (msg.substring(0,5) == "/nick"){
+      console.log("nick");
+      console.log(msg.substring(6));
+      username = msg.substring(6);
+      socket.emit("sendUser", username);
+      socket.on("sendUser", function(username){
+        socket.emit("sendUser", username);
+        console.log("sending: "+username);
+      });
+    }
+      else{
+        io.emit('chat message', "["+timestamp+"] "+msg);
+      }
   });
 });
 

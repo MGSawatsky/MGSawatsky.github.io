@@ -16,3 +16,11 @@ function get(timestamp){
 
   return timestamp;
 }
+
+function updateUser(){
+  var socket = io();
+  socket.on('sendUser', function(username){
+    console.log("recieving: "+username);
+    document.getElementById("username").innerHTML=username;
+  });
+}

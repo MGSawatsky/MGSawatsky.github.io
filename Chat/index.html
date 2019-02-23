@@ -13,7 +13,7 @@
       #messages li:nth-child(odd) { background: #eee; }
     </style>
     <script type="text/javascript" src="ChatScript.js"></script>
-    <script type="text/javascript" src="index.js"></script>
+    <!-- <script type="text/javascript" src="index.js"></script> -->
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <!--Custom CSS -->
@@ -59,6 +59,11 @@
         });
         socket.on('chat message', function(msg){
           $('#messages').append($('<li>').text(msg));
+        });
+        //updates username 
+        socket.on('sendUser', function(username){
+          console.log("recieving: "+username);
+          document.getElementById("username").innerHTML=username;
         });
       });
     </script>
