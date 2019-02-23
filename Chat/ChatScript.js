@@ -1,6 +1,9 @@
 
 var userCount = 0;
-
+const userInfo = {
+  username : '',
+  color : "#000000",
+}
 function updateUser(username){
     document.getElementById("username").innerHTML=username;
 }
@@ -16,7 +19,11 @@ function get(timestamp){
 
   return timestamp;
 }
+function printInfo(){
+  console.log("username: "+userInfo.username);
+  console.log("color: "+userInfo.color);
 
+}
 function updateUser(){
   var socket = io();
   socket.on('sendUser', function(username){

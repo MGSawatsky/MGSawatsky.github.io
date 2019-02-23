@@ -45,6 +45,7 @@
       var socket = io();
       socket.on('sendUser', function(username){
         console.log("recieving: "+username);
+        userInfo.username = username;
         document.getElementById("username").innerHTML=username;
       });
     </script>
@@ -53,17 +54,31 @@
         var socket = io();
         $('form').submit(function(e){
           e.preventDefault(); // prevents page reloading
-          socket.emit('chat message', $('#m').val());
+          socket.emit('chat message', $('#m').val(), userInfo.username, userInfo.color);
           $('#m').val('');
           return false;
         });
-        socket.on('chat message', function(msg){
+        socket.on('chat message', function(msg, username, color){
           $('#messages').append($('<li>').text(msg));
+          document.getElementById("username").style.color = color;
+          printInfo();
         });
-        //updates username 
+        //updates username
         socket.on('sendUser', function(username){
           console.log("recieving: "+username);
           document.getElementById("username").innerHTML=username;
+          userInfo.username = username;
+        });
+        //Changes colour if needed
+        socket.on('sendColor', function(color){
+          console.log("color: "+color);
+          document.getElementById("messages").style.color = color;
+          userInfo.color = color;
+        });
+
+        socket.on('userList', function(givenUsername){
+          console.log("recieving for userlist");
+          $('#users').append($('<li>').text(givenUsername));
         });
       });
     </script>

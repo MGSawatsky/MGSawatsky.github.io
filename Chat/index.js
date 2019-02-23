@@ -12,6 +12,11 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 var timestamp = new Date().getTime();
 var userCount = 0;
+
+const userInfo = {
+  username : '',
+  color : "#000000",
+}
 // var username = "";
 // app.get('/', function(req, res){
 //   res.sendFile(__dirname + '/index.html');
@@ -41,14 +46,27 @@ io.on('connection', function(socket){
   socket.emit("sendUser", username);
   socket.on("sendUser", function(username){
     socket.emit("sendUser", username);
+    io.emit("userList", givenUsername);
     console.log("sending: "+username);
   });
+  socket.on("userList", function(givenUsername){
+    console.log("Sending for userlist");
+    io.emit("userList", givenUsername);
+    console.log("Sending for userlist");
+  });
   //Sends message to all users with a timestamp
-  socket.on('chat message', function(msg){
+  socket.on('chat message', function(msg, givenUsername, color){
     var timestamp = get('timestamp');
     if(msg.substring(0,10) == "/nickcolor"){
       console.log("colour");
       console.log(msg.substring(11));
+      userInfo.color = "#"+msg.substring(11);
+      var color = userInfo.color;
+      socket.emit("sendColor", color);
+      socket.on("sendColor", function(color){
+        socket.emit("sendColor", color);
+        console.log("sending: "+color);
+      });
     }
     else if (msg.substring(0,5) == "/nick"){
       console.log("nick");
@@ -61,11 +79,14 @@ io.on('connection', function(socket){
       });
     }
       else{
-        io.emit('chat message', "["+timestamp+"] "+msg);
+        io.emit('chat message', "["+timestamp+"] "+givenUsername+": "+msg);
       }
   });
 });
 
+function updateUserList(){
+
+}
 http.listen(port, function(){
   console.log('listening on *:' + port);
 });
