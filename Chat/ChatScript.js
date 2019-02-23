@@ -1,9 +1,8 @@
 
 var userCount = 0;
 
-function updateUser(){
-    var username = document.getElementById("username").innerHTML="USER"+userCount;
-    userCount = userCount+1;
+function updateUser(username){
+    document.getElementById("username").innerHTML=username;
 }
 
 function get(timestamp){

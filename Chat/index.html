@@ -12,6 +12,8 @@
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
     </style>
+    <script type="text/javascript" src="ChatScript.js"></script>
+    <script type="text/javascript" src="index.js"></script>
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <!--Custom CSS -->
@@ -24,7 +26,7 @@
         <ul id="users"></ul>
       </div>
       <div class="container-fluid" id="message-board">
-        <p>You are <p id="username"></p></p>
+        <p>You are <b id="username"></b></p>
         <ul id="messages"></ul>
       </div>
       <div id="send-box">
@@ -37,8 +39,14 @@
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script> -->
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script type="text/javascript" src="ChatScript.js"></script>
+    <!-- <script type="text/javascript" src="ChatScript.js"></script>
+    <script type="text/javascript" src="index.js"></script> -->
     <script>
+      var socket = io();
+      socket.on('sendUser', function(username){
+        console.log("recieving: "+username);
+        document.getElementById("username").innerHTML=username;
+      });
     </script>
     <script>
       $(function () {
@@ -50,8 +58,7 @@
           return false;
         });
         socket.on('chat message', function(msg){
-          var timestamp = get('timestamp');
-          $('#messages').append($('<li>').text("["+timestamp+ "] " +msg));
+          $('#messages').append($('<li>').text(msg));
         });
       });
     </script>
