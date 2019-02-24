@@ -18,6 +18,7 @@ const userInfo = {
   color : "#000000",
 }
 var listOfUsers = '';
+var messageList= '';
 // var username = "";
 // app.get('/', function(req, res){
 //   res.sendFile(__dirname + '/index.html');
@@ -55,16 +56,13 @@ io.on('connection', function(socket){
     console.log("list of users1:  " + listOfUsers);
     console.log("sending: "+username);
   });
+  //Sends list of users online
   listOfUsers = String(listOfUsers+username+"<br>");
   io.emit("userList", listOfUsers);
   console.log("list of users2:  " + listOfUsers);
-  //socket.emit('userList', username);
-  // socket.on("userList", function(givenUsername){
-  //   console.log("Sending for userlist");
-  //   socket.emit("userList", givenUsername);
-  //   io.emit("userList", givenUsername);
-  //   console.log("Sending for userlist");
-  // });
+
+  //sends current message board
+  socket.emit("sendMessageBoard", messageList);
 
   //Sends message to all users with a timestamp
   socket.on('chat message', function(msg, givenUsername, givenColor){
@@ -81,19 +79,25 @@ io.on('connection', function(socket){
       });
     }
     else if (msg.substring(0,5) == "/nick"){
-      console.log("nick");
       console.log(msg.substring(6));
       username = msg.substring(6);
-      listOfUsers = listOfUsers.replace(givenUsername, username);
-      socket.emit("sendUser", username);
-      socket.on("sendUser", function(username){
+      if(listOfUsers.includes(username)){
+        console.log('username taken');
+      }
+      else{
+        listOfUsers = listOfUsers.replace(givenUsername, username);
         socket.emit("sendUser", username);
-        console.log("sending: "+username);
-      });
+        socket.on("sendUser", function(username){
+          socket.emit("sendUser", username);
+          console.log("sending: "+username);
+        });
+      }
       io.emit("userList", listOfUsers);
     }
       else{
-        io.emit('chat message', "["+timestamp+"] "+givenUsername+": "+msg, givenUsername, givenColor);
+        io.emit('chat message', "<font color=#707070>["+timestamp+"]</font> "+givenUsername+": "+msg, givenUsername, givenColor);
+        messageList = messageList.concat('<li>' + msg);
+        console.log(messageList);
       }
   });
 });

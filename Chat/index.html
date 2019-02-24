@@ -47,6 +47,11 @@
         userInfo.color = '000000';
         document.getElementById("username").innerHTML=username;
       });
+      //updates messageList
+      socket.on('sendMessageBoard', function(messageList){
+        console.log("recieving for messageList: " + messageList);
+        $('#messages').append(messageList);
+      });
     </script>
     <script>
       $(function () {
