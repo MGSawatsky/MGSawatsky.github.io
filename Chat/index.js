@@ -17,6 +17,7 @@ const userInfo = {
   username : '',
   color : "#000000",
 }
+var listOfUsers = '';
 // var username = "";
 // app.get('/', function(req, res){
 //   res.sendFile(__dirname + '/index.html');
@@ -43,17 +44,28 @@ io.on('connection', function(socket){
   username = "USER"+userCount;
   console.log("USER"+userCount + "::" + username);
   userCount = userCount+1;
+
+
+  //method of assigning username on sign in
   socket.emit("sendUser", username);
   socket.on("sendUser", function(username){
+    console.log("list of users4:  " + listOfUsers);
     socket.emit("sendUser", username);
-    io.emit("userList", givenUsername);
+    io.emit("userList", username);
+    console.log("list of users1:  " + listOfUsers);
     console.log("sending: "+username);
   });
-  socket.on("userList", function(givenUsername){
-    console.log("Sending for userlist");
-    io.emit("userList", givenUsername);
-    console.log("Sending for userlist");
-  });
+  listOfUsers = String(listOfUsers+username+"<br>");
+  io.emit("userList", listOfUsers);
+  console.log("list of users2:  " + listOfUsers);
+  //socket.emit('userList', username);
+  // socket.on("userList", function(givenUsername){
+  //   console.log("Sending for userlist");
+  //   socket.emit("userList", givenUsername);
+  //   io.emit("userList", givenUsername);
+  //   console.log("Sending for userlist");
+  // });
+
   //Sends message to all users with a timestamp
   socket.on('chat message', function(msg, givenUsername, givenColor){
     var timestamp = get('timestamp');
@@ -72,11 +84,13 @@ io.on('connection', function(socket){
       console.log("nick");
       console.log(msg.substring(6));
       username = msg.substring(6);
+      listOfUsers = listOfUsers.replace(givenUsername, username);
       socket.emit("sendUser", username);
       socket.on("sendUser", function(username){
         socket.emit("sendUser", username);
         console.log("sending: "+username);
       });
+      io.emit("userList", listOfUsers);
     }
       else{
         io.emit('chat message', "["+timestamp+"] "+givenUsername+": "+msg, givenUsername, givenColor);

@@ -59,7 +59,6 @@
           return false;
         });
         socket.on('chat message', function(msg, username, color){
-          console.log(color);
           var msgString = msg.fontcolor(color);
           $('#messages').append($('<li>' + msgString));
           //document.getElementById("username").style.color = color;
@@ -73,14 +72,13 @@
         });
         //Changes colour if needed
         socket.on('sendColor', function(color){
-          console.log("color: "+color);
           //document.getElementById("messages").style.color = color;
           userInfo.color = color;
         });
-
-        socket.on('userList', function(givenUsername){
-          console.log("recieving for userlist");
-          $('#users').append($('<li>').text(givenUsername));
+        //updates userList
+        socket.on('userList', function(listOfUsers){
+          console.log("recieving for userlist: "+listOfUsers);
+          document.getElementById("users").innerHTML=listOfUsers;
         });
       });
     </script>
