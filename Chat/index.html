@@ -80,6 +80,10 @@
           console.log("recieving for userlist: "+listOfUsers);
           document.getElementById("users").innerHTML=listOfUsers;
         });
+        socket.on('disconnect', function(){
+          socket.emit('disconnectMsg', userInfo.username);
+          console.log('disconnect');
+        });
       });
     </script>
   </body>

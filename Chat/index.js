@@ -98,9 +98,14 @@ io.on('connection', function(socket){
   });
 });
 
-function updateUserList(){
+io.on('disconnect', function(socket){
+  console.log('disconnect2');
+  socket.on('disconnectMsg', function(usernameDis){
+    listOfUsers = listOfUsers.replace(usernameDis+'<br>', '');
+    console.log('disconnect');
+  });
+});
 
-}
 http.listen(port, function(){
   console.log('listening on *:' + port);
 });
