@@ -65,6 +65,9 @@
         });
         socket.on('chat message', function(msg, username, color){
           var msgString = msg.fontcolor(color);
+          if(username === userInfo.username){
+            msgString = "<b>"+msgString+"</b>";
+          }
           $('#messages').append($('<li>' + msgString));
           //document.getElementById("username").style.color = color;
           printInfo();
@@ -82,7 +85,6 @@
         });
         //updates userList
         socket.on('userList', function(listOfUsers){
-          console.log("recieving for userlist: "+listOfUsers);
           document.getElementById("users").innerHTML=listOfUsers;
         });
         socket.on('disconnect', function(){
@@ -90,6 +92,12 @@
           console.log('disconnect');
         });
       });
+    </script>
+    <script>
+    window.addEventListener("beforeunload", function(event){
+      window.onbeforeuload = socket.emit('disconnectMsg', socket, userInfo.username);
+    });
+    window.onbeforeuload = socket.emit('disconnectMsg', socket, userInfo.username);
     </script>
   </body>
 </html>

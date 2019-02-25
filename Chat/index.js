@@ -95,20 +95,24 @@ io.on('connection', function(socket){
       io.emit("userList", listOfUsers);
     }
       else{
+        var completeMsg = "<font color=#707070>["+timestamp+"]</font> "+givenUsername+": "+msg;
         io.emit('chat message', "<font color=#707070>["+timestamp+"]</font> "+givenUsername+": "+msg, givenUsername, givenColor);
-        messageList = messageList.concat('<li>' + msg);
-        console.log(messageList);
+        messageList = messageList.concat('<li>' + completeMsg);
       }
+  });
+  socket.on('disconnect', function(socket, usernameDis){
+    console.log('disconnect2: '+ usernameDis);
+      listOfUsers = listOfUsers.replace(usernameDis+'<br>', '');
+      console.log('disconnect');
+  });
+  socket.on('disconnectMsg', function(socket, usernameDis){
+    console.log('usernameDis: '+ usernameDis);
+      listOfUsers = listOfUsers.replace(usernameDis+'<br>', '');
+      console.log('usernameDis');
   });
 });
 
-io.on('disconnect', function(socket){
-  console.log('disconnect2');
-  socket.on('disconnectMsg', function(usernameDis){
-    listOfUsers = listOfUsers.replace(usernameDis+'<br>', '');
-    console.log('disconnect');
-  });
-});
+
 
 http.listen(port, function(){
   console.log('listening on *:' + port);
