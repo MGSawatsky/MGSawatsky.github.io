@@ -49,6 +49,7 @@ io.on('connection', function(socket){
 
   //method of assigning username on sign in
   socket.emit("sendUser", username);
+  //rename this function probably will fix the double user?
   socket.on("sendUser", function(username){
     console.log("list of users4:  " + listOfUsers);
     socket.emit("sendUser", username);
