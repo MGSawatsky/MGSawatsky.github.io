@@ -3,6 +3,7 @@ var userCount = 0;
 const userInfo = {
   username : '',
   color : "#000000",
+  cookieValue: false,
 }
 function updateUser(username){
     document.getElementById("username").innerHTML=username;
@@ -30,4 +31,31 @@ function updateUser(){
     console.log("recieving: "+username);
     document.getElementById("username").innerHTML=username;
   });
+}
+
+function checkCookie(){
+  if (document.cookie.split(';').filter((item) => item.trim().startsWith('usernameCookie=')).length) {
+    console.log('The cookie "usernameCookie" exists (ES6)');
+    // var testC = "";
+    // testC = document.cookie;
+    // console.log(testC);
+  //     testC = testC.replace("usernameCookie=", "");
+  //     console.log(testC);
+  //     userInfo.username = testC;
+  //     userInfo.cookieValue = true;
+  //     document.getElementById("username").innerHTML=userInfo.username;
+  }
+  else{
+  //   socket.on('sendUser', function(username){
+  //     console.log("recieving2: "+username);
+  //     document.getElementById("username").innerHTML=username;
+  //     userInfo.username = username;
+  //
+      var tempString = "usernameCookie="+userInfo.username;
+      console.log(tempString);
+      console.log(userInfo.username);
+      document.cookie = tempString;
+  //   });
+  //
+  }
 }

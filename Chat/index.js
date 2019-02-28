@@ -12,6 +12,7 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 var timestamp = new Date().getTime();
 var userCount = 0;
+var cookieParser = require('cookie-parser');
 
 const userInfo = {
   username : '',
@@ -19,6 +20,7 @@ const userInfo = {
 }
 var listOfUsers = '';
 var messageList= '';
+var lastUser='';
 // var username = "";
 // app.get('/', function(req, res){
 //   res.sendFile(__dirname + '/index.html');
@@ -26,8 +28,9 @@ var messageList= '';
 
 var htmlPath = path.join(__dirname);
 app.use(express.static(htmlPath));
+app.use(cookieParser());
 
-function get(timestamp){
+function getTime(timestamp){
   var currentDate = new Date();
   var date = currentDate.getDate();
   var month = currentDate.getMonth() + 1; //January is 0 not 1
@@ -38,35 +41,84 @@ function get(timestamp){
 
   return timestamp;
 }
-// var nodePath = path.join(__dirname, "node_modules/socket.io/socket.io.js");
-// app.use(express.static(nodePath));
+
+function assignUsername(){
+
+  return username;
+}
 
 io.on('connection', function(socket){
-  username = "USER"+userCount;
-  console.log("USER"+userCount + "::" + username);
-  userCount = userCount+1;
+  // username = '';
+  // socket.on('checkUsername', function(username){
+  //   if(username == ""){
+  //     username = "USER"+userCount;
+  //     userCount = userCount+1;
+  //     console.log("USER"+userCount + "::" + username);
+  //   }
+  //   else{
+  //     username = 'NO';
+  //   }
+  // });
 
+
+  username = "USER"+userCount;
+  // while(listOfUsers.includes(username)){
+    userCount = userCount+1;
+    // username = "USER"+userCount;
+  // }
+  console.log("USER"+userCount + "::" + username);
+
+
+  app.get('/list', function(req, res){
+    res.send(req.cookies);
+  });
+  app.get('/', function(req, res){
+    res.cookie("username, color, socket");
+    if(req.cookies["cookieUsername"]){
+      socket.emit('sendUser', req.cookie['cookieUsername']);
+      res.send("test");
+    }
+    else{
+      res.cookie('cookieUsername', username);
+      console.log("creating cookie?");
+    }
+    res.send("Created cookie?");
+  });
 
   //method of assigning username on sign in
   socket.emit("sendUser", username);
-  socket.on("sendUser", function(username){
-    console.log("list of users4:  " + listOfUsers);
-    socket.emit("sendUser", username);
-    io.emit("userList", username);
-    console.log("list of users1:  " + listOfUsers);
-    console.log("sending: "+username);
-  });
+  // socket.on("sendUserReply", function(reply, username){
+  //   if(reply){
+  //     userCount = userCount+1;
+  //     lastUser=username;
+  //   }
+  //   else{
+  //   }
+  // });
+  // socket.on("sendUser", function(username){
+  //   console.log("list of users4:  " + listOfUsers);
+  //   socket.emit("sendUser", username);
+  //   io.emit("userList", username);
+  //   console.log("list of users1:  " + listOfUsers);
+  //   console.log("sending: "+username);
+  // });
   //Sends list of users online
-  listOfUsers = String(listOfUsers+username+"<br>");
-  io.emit("userList", listOfUsers);
-  console.log("list of users2:  " + listOfUsers);
+  // if(lastUser===username){
+    // io.emit("userList", listOfUsers);
+  // }
+  // else{
+    listOfUsers = String(listOfUsers+username+"<br>");
+    io.emit("userList", listOfUsers);
+    console.log("list of users2:  " + listOfUsers);
+  // }
+
 
   //sends current message board
   socket.emit("sendMessageBoard", messageList);
 
   //Sends message to all users with a timestamp
   socket.on('chat message', function(msg, givenUsername, givenColor){
-    var timestamp = get('timestamp');
+    var timestamp = getTime('timestamp');
     if(msg.substring(0,10) == "/nickcolor"){
       console.log("colour");
       console.log(msg.substring(11));

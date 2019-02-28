@@ -40,25 +40,15 @@
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script> -->
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      var socket = io();
-      socket.on('sendUser', function(username){
-        console.log("recieving: "+username);
-        userInfo.username = username;
-        userInfo.color = '000000';
-        document.getElementById("username").innerHTML=username;
-      });
-      //updates messageList
-      socket.on('sendMessageBoard', function(messageList){
-        console.log("recieving for messageList: " + messageList);
-        $('#messages').append(messageList);
-      });
-    </script>
-    <script>
       $(function () {
         var socket = io();
+        socket.emit("checkUsername", userInfo.username);
         $('form').submit(function(e){
           e.preventDefault(); // prevents page reloading
           console.log(userInfo.color);
+          // if($('#m').val().substring(0,5) == "/nick"){
+          //   userInfo.cookieValue = false;
+          // }
           socket.emit('chat message', $('#m').val(), userInfo.username, userInfo.color);
           $('#m').val('');
           return false;
@@ -72,12 +62,22 @@
           //document.getElementById("username").style.color = color;
           printInfo();
         });
-        //updates username
-        socket.on('sendUser', function(username){
-          console.log("recieving: "+username);
-          document.getElementById("username").innerHTML=username;
-          userInfo.username = username;
+        //updates MessageBoard
+        socket.on('sendMessageBoard', function(messageList){
+          console.log("recieving for messageList: " + messageList);
+          $('#messages').append(messageList);
         });
+        //updates username
+        // if(userInfo.cookieValue === false){
+          socket.on('sendUser', function(username){
+            console.log("recieving: "+username);
+            document.getElementById("username").innerHTML=username;
+            userInfo.username = username;
+            // var reply = true;
+            // socket.emit('sendUserReply', reply, userInfo.username);
+          });
+        // }
+
         //Changes colour if needed
         socket.on('sendColor', function(color){
           //document.getElementById("messages").style.color = color;
@@ -91,13 +91,18 @@
           socket.emit('disconnectMsg', userInfo.username);
           console.log('disconnect');
         });
+        if(userInfo.username != ""){
+          console.log("testing");
+          checkCookie();
+        }
+
       });
     </script>
     <script>
     window.addEventListener("beforeunload", function(event){
       window.onbeforeuload = socket.emit('disconnectMsg', socket, userInfo.username);
     });
-    window.onbeforeuload = socket.emit('disconnectMsg', socket, userInfo.username);
+  //  window.onbeforeuload = socket.emit('disconnectMsg', socket, userInfo.username);
     </script>
   </body>
 </html>
