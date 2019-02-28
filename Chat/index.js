@@ -87,6 +87,7 @@ io.on('connection', function(socket){
 
   //method of assigning username on sign in
   socket.emit("sendUser", username);
+<<<<<<< HEAD
   // socket.on("sendUserReply", function(reply, username){
   //   if(reply){
   //     userCount = userCount+1;
@@ -102,6 +103,16 @@ io.on('connection', function(socket){
   //   console.log("list of users1:  " + listOfUsers);
   //   console.log("sending: "+username);
   // });
+=======
+  //rename this function probably will fix the double user?
+  socket.on("sendUser", function(username){
+    console.log("list of users4:  " + listOfUsers);
+    socket.emit("sendUser", username);
+    io.emit("userList", username);
+    console.log("list of users1:  " + listOfUsers);
+    console.log("sending: "+username);
+  });
+>>>>>>> c0db5e74030789a7d8af5bde7512cc16ebadcacb
   //Sends list of users online
   // if(lastUser===username){
     // io.emit("userList", listOfUsers);
