@@ -42,30 +42,59 @@ function getTime(timestamp){
   return timestamp;
 }
 
+/*
+Based off function from w3schools for getting the value of a cookie from the cookie string
+Tutorial URL: https://www.w3schools.com/js/js_cookies.asp
+*/
+function getCookie(cookieDoc) {
+  var name = "usernameCookie=";
+  var decodedCookie = decodeURIComponent(cookieDoc);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+
+
 function assignUsername(){
 
   return username;
 }
 
+
+
+
+
 io.on('connection', function(socket){
   // username = '';
-  // socket.on('checkUsername', function(username){
-  //   if(username == ""){
-  //     username = "USER"+userCount;
-  //     userCount = userCount+1;
-  //     console.log("USER"+userCount + "::" + username);
-  //   }
-  //   else{
-  //     username = 'NO';
-  //   }
-  // });
+  socket.on('checkUsername', function(cookieDoc){
+
+    var cookieVal = getCookie(cookieDoc);
+
+    if(cookieVal == "" || username == undefined){
+      username = "USER"+userCount;
+      userCount = userCount+1;
+      console.log("USER"+userCount + "::" + username);
+    }
+    else{
+      console.log("COOKIE ALREADY SET");
+    }
+  });
 
 
   username = "USER"+userCount;
-  // while(listOfUsers.includes(username)){
+  while(listOfUsers.includes(username)){
     userCount = userCount+1;
-    // username = "USER"+userCount;
-  // }
+    username = "USER"+userCount;
+  }
   console.log("USER"+userCount + "::" + username);
 
 

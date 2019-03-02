@@ -20,6 +20,7 @@ function get(timestamp){
 
   return timestamp;
 }
+
 function printInfo(){
   console.log("username: "+userInfo.username);
   console.log("color: "+userInfo.color);
@@ -33,9 +34,13 @@ function updateUser(){
   });
 }
 
-function checkCookie(){
+function checkCookie(givenUsername){
   if (document.cookie.split(';').filter((item) => item.trim().startsWith('usernameCookie=')).length) {
-    console.log('The cookie "usernameCookie" exists (ES6)');
+    var tempString = "usernameCookie="+givenUsername+";";
+    console.log('The cookie "usernameCookie" exists (ES6): '+tempString);
+    console.log("cookie:  "+userInfo.username+givenUsername);
+
+    document.cookie = tempString;
     // var testC = "";
     // testC = document.cookie;
     // console.log(testC);
@@ -51,9 +56,9 @@ function checkCookie(){
   //     document.getElementById("username").innerHTML=username;
   //     userInfo.username = username;
   //
-      var tempString = "usernameCookie="+userInfo.username;
+      var tempString = "usernameCookie="+givenUsername+";";
       console.log(tempString);
-      console.log(userInfo.username);
+      console.log("cookie:  "+userInfo.username+givenUsername);
       document.cookie = tempString;
   //   });
   //

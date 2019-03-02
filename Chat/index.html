@@ -42,7 +42,7 @@
     <script>
       $(function () {
         var socket = io();
-        socket.emit("checkUsername", userInfo.username);
+        socket.emit("checkUsername", document.cookie);
         $('form').submit(function(e){
           e.preventDefault(); // prevents page reloading
           console.log(userInfo.color);
@@ -59,6 +59,7 @@
             msgString = "<b>"+msgString+"</b>";
           }
           $('#messages').append($('<li>' + msgString));
+          checkCookie(userInfo.username);
           //document.getElementById("username").style.color = color;
           printInfo();
         });
@@ -73,6 +74,7 @@
             console.log("recieving: "+username);
             document.getElementById("username").innerHTML=username;
             userInfo.username = username;
+            checkCookie(userInfo.username);
             // var reply = true;
             // socket.emit('sendUserReply', reply, userInfo.username);
           });
@@ -91,10 +93,6 @@
           socket.emit('disconnectMsg', userInfo.username);
           console.log('disconnect');
         });
-        if(userInfo.username != ""){
-          console.log("testing");
-          checkCookie();
-        }
 
       });
     </script>
