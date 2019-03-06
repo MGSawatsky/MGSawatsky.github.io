@@ -70,7 +70,7 @@ function assignUsername(){
 }
 
 
-//socket.username instead of username 
+//socket.username instead of username
 
 
 io.on('connection', function(socket){
@@ -79,8 +79,8 @@ io.on('connection', function(socket){
 
     var cookieVal = getCookie(cookieDoc);
 
-    if(cookieVal == "" || username == undefined){
-      username = "USER"+userCount;
+    if(cookieVal == "" || socket.username == undefined){
+      socket.username = "USER"+userCount;
       userCount = userCount+1;
       console.log("USER"+userCount + "::" + username);
     }
@@ -90,12 +90,12 @@ io.on('connection', function(socket){
   });
 
 
-  username = "USER"+userCount;
-  while(listOfUsers.includes(username)){
+  socket.username = "USER"+userCount;
+  while(listOfUsers.includes(socket.username)){
     userCount = userCount+1;
-    username = "USER"+userCount;
+    socket.username = "USER"+userCount;
   }
-  console.log("USER"+userCount + "::" + username);
+  console.log("USER"+userCount + "::" + socket.username);
 
 
   app.get('/list', function(req, res){
@@ -108,14 +108,14 @@ io.on('connection', function(socket){
       res.send("test");
     }
     else{
-      res.cookie('cookieUsername', username);
+      res.cookie('cookieUsername', socket.username);
       console.log("creating cookie?");
     }
     res.send("Created cookie?");
   });
 
   //method of assigning username on sign in
-  socket.emit("sendUser", username);
+  socket.emit("sendUser", socket.username);
   // socket.on("sendUserReply", function(reply, username){
   //   if(reply){
   //     userCount = userCount+1;
@@ -136,7 +136,7 @@ io.on('connection', function(socket){
     // io.emit("userList", listOfUsers);
   // }
   // else{
-    listOfUsers = String(listOfUsers+username+"<br>");
+    listOfUsers = String(listOfUsers+socket.username+"<br>");
     io.emit("userList", listOfUsers);
     console.log("list of users2:  " + listOfUsers);
   // }
@@ -148,6 +148,7 @@ io.on('connection', function(socket){
   //Sends message to all users with a timestamp
   socket.on('chat message', function(msg, givenUsername, givenColor){
     var timestamp = getTime('timestamp');
+    var username = '';
     if(msg.substring(0,10) == "/nickcolor"){
       console.log("colour");
       console.log(msg.substring(11));
@@ -166,8 +167,9 @@ io.on('connection', function(socket){
         console.log('username taken');
       }
       else{
-        listOfUsers = listOfUsers.replace(givenUsername, username);
-        socket.emit("sendUser", username);
+        socket.username = username;
+        listOfUsers = listOfUsers.replace(givenUsername, socket.username);
+        socket.emit("sendUser", socket.username);
         socket.on("sendUser", function(username){
           socket.emit("sendUser", username);
           console.log("sending: "+username);
@@ -181,15 +183,13 @@ io.on('connection', function(socket){
         messageList = messageList.concat('<li>' + completeMsg);
       }
   });
-  socket.on('disconnect', function(socket, usernameDis){
-    console.log('disconnect2: '+ usernameDis);
-      listOfUsers = listOfUsers.replace(usernameDis+'<br>', '');
+  socket.on('disconnect', function(){
+    console.log('disconnect2: '+ socket.username);
+      listOfUsers = listOfUsers.replace(socket.username+'<br>', '');
+      io.emit("userList", listOfUsers);
+      var disconnectMsg = "User: " + socket.username +" has disconnected.";
+      io.emit('chat message', disconnectMsg);
       console.log('disconnect');
-  });
-  socket.on('disconnectMsg', function(socket, usernameDis){
-    console.log('usernameDis: '+ usernameDis);
-      listOfUsers = listOfUsers.replace(usernameDis+'<br>', '');
-      console.log('usernameDis');
   });
 });
 

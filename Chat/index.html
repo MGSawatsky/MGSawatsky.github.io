@@ -98,18 +98,7 @@
         socket.on('userList', function(listOfUsers){
           document.getElementById("users").innerHTML=listOfUsers;
         });
-        socket.on('disconnect', function(){
-          socket.emit('disconnectMsg', userInfo.username);
-          console.log('disconnect');
-        });
-
       });
-    </script>
-    <script>
-    window.addEventListener("beforeunload", function(event){
-      window.onbeforeuload = socket.emit('disconnectMsg', socket, userInfo.username);
-    });
-  //  window.onbeforeuload = socket.emit('disconnectMsg', socket, userInfo.username);
     </script>
   </body>
 </html>
