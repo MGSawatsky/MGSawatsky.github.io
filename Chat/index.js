@@ -70,7 +70,7 @@ function assignUsername(){
 }
 
 
-
+//socket.username instead of username 
 
 
 io.on('connection', function(socket){
