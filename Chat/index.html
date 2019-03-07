@@ -22,7 +22,7 @@
   <body>
     <div class="wrapper">
       <div id="sidebar">
-        <p>USERS</p>
+        <p><u>USERS ONLINE</u></p>
         <ul id="users"></ul>
       </div>
       <div class="container-fluid" id="message-board">
@@ -50,7 +50,7 @@
       $(function () {
         var socket = io();
         var scrollbar = document.getElementById("messages");
-        socket.emit("checkUsername", document.cookie);
+        //socket.emit("checkUsername", document.cookie);
         $('form').submit(function(e){
           e.preventDefault(); // prevents page reloading
           console.log(userInfo.color);
@@ -67,7 +67,7 @@
             msgString = "<b>"+msgString+"</b>";
           }
           $('#messages').append($('<li>' + msgString));
-          checkCookie(userInfo.username);
+          //checkCookie(userInfo.username);
           $('#test-div').scrollTop(9999999);
           //document.getElementById("username").style.color = color;
           printInfo();
@@ -83,7 +83,8 @@
             console.log("recieving: "+username);
             document.getElementById("username").innerHTML=username;
             userInfo.username = username;
-            checkCookie(userInfo.username);
+            document.cookie = "cookieUsername="+username;
+            //checkCookie(userInfo.username);
             // var reply = true;
             // socket.emit('sendUserReply', reply, userInfo.username);
           });

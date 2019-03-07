@@ -18,6 +18,8 @@ const userInfo = {
   username : '',
   color : "#000000",
 }
+
+var savedUsername;
 var listOfUsers = '';
 var messageList= '';
 var lastUser='';
@@ -25,10 +27,6 @@ var lastUser='';
 // app.get('/', function(req, res){
 //   res.sendFile(__dirname + '/index.html');
 // });
-
-var htmlPath = path.join(__dirname);
-app.use(express.static(htmlPath));
-app.use(cookieParser());
 
 function getTime(timestamp){
   var currentDate = new Date();
@@ -63,11 +61,27 @@ function getCookie(cookieDoc) {
 }
 
 
+var htmlPath = path.join(__dirname);
+// app.use(express.static(htmlPath));
+app.use(cookieParser());
 
-function assignUsername(){
-
-  return username;
-}
+app.get('/list', function(req, res){
+  res.send(req.cookies);
+});
+app.get('/', function(req, res){
+  if(req.cookies['cookieUsername']){
+    savedUsername = req.cookies['cookieUsername'];
+    console.log('Cookie already exists. Value: ' + req.cookies['cookieUsername']);
+  }
+  else{
+    savedUsername = "USER"+userCount;
+    userCount = userCount+1;
+    res.cookie('cookieUsername', savedUsername);
+    console.log("creating cookie " + savedUsername);
+  }
+  app.use(express.static(htmlPath));
+  res.sendFile(__dirname + '/index.html');
+});
 
 
 //socket.username instead of username
@@ -75,71 +89,35 @@ function assignUsername(){
 
 io.on('connection', function(socket){
   // username = '';
-  socket.on('checkUsername', function(cookieDoc){
-
-    var cookieVal = getCookie(cookieDoc);
-
-    if(cookieVal == "" || socket.username == undefined){
-      socket.username = "USER"+userCount;
-      userCount = userCount+1;
-      console.log("USER"+userCount + "::" + username);
-    }
-    else{
-      console.log("COOKIE ALREADY SET");
-    }
-  });
-
-
-  socket.username = "USER"+userCount;
-  while(listOfUsers.includes(socket.username)){
-    userCount = userCount+1;
-    socket.username = "USER"+userCount;
-  }
-  console.log("USER"+userCount + "::" + socket.username);
-
-
-  app.get('/list', function(req, res){
-    res.send(req.cookies);
-  });
-  app.get('/', function(req, res){
-    res.cookie("username, color, socket");
-    if(req.cookies["cookieUsername"]){
-      socket.emit('sendUser', req.cookie['cookieUsername']);
-      res.send("test");
-    }
-    else{
-      res.cookie('cookieUsername', socket.username);
-      console.log("creating cookie?");
-    }
-    res.send("Created cookie?");
-  });
-
-  //method of assigning username on sign in
-  socket.emit("sendUser", socket.username);
-  // socket.on("sendUserReply", function(reply, username){
-  //   if(reply){
+  // socket.on('checkUsername', function(cookieDoc){
+  //
+  //   var cookieVal = getCookie(cookieDoc);
+  //
+  //   if(cookieVal == "" || socket.username == undefined){
+  //     socket.username = "USER"+userCount;
   //     userCount = userCount+1;
-  //     lastUser=username;
+  //     console.log("USER"+userCount + "::" + username);
   //   }
   //   else{
+  //     console.log("COOKIE ALREADY SET");
   //   }
   // });
-  // socket.on("sendUser", function(username){
-  //   console.log("list of users4:  " + listOfUsers);
-  //   socket.emit("sendUser", username);
-  //   io.emit("userList", username);
-  //   console.log("list of users1:  " + listOfUsers);
-  //   console.log("sending: "+username);
-  // });
-  //Sends list of users online
-  // if(lastUser===username){
-    // io.emit("userList", listOfUsers);
+
+
+  //
+  // socket.username = "USER"+userCount;
+  // while(listOfUsers.includes(socket.username)){
+  //   userCount = userCount+1;
+  //   socket.username = "USER"+userCount;
   // }
-  // else{
-    listOfUsers = String(listOfUsers+socket.username+"<br>");
-    io.emit("userList", listOfUsers);
-    console.log("list of users2:  " + listOfUsers);
-  // }
+  // console.log("USER"+userCount + "::" + socket.username);
+
+  //method of assigning username on sign in
+  socket.username = savedUsername;
+  socket.emit("sendUser", socket.username);
+  listOfUsers = String(listOfUsers+socket.username+"<br>");
+  io.emit("userList", listOfUsers);
+  console.log("list of users2:  " + listOfUsers);
 
 
   //sends current message board

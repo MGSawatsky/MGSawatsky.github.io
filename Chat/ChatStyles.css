@@ -12,6 +12,7 @@
     z-index: 999;
     background: #7386D5;
     color: #111;
+    text-indent: 25px;
 }
 
 #sidebar ul{
@@ -41,7 +42,9 @@
  overflow-y: auto;
 }
 #test-div{
+  overflow: auto;
   overflow-y: auto;
+  overflow-wrap: break-word;
   bottom: 0;
   position: relative;
 }

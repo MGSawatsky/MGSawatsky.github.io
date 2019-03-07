@@ -34,33 +34,33 @@ function updateUser(){
   });
 }
 
-function checkCookie(givenUsername){
-  if (document.cookie.split(';').filter((item) => item.trim().startsWith('usernameCookie=')).length) {
-    var tempString = "usernameCookie="+givenUsername+";";
-    console.log('The cookie "usernameCookie" exists (ES6): '+tempString);
-    console.log("cookie:  "+userInfo.username+givenUsername);
-
-    document.cookie = tempString;
-    // var testC = "";
-    // testC = document.cookie;
-    // console.log(testC);
-  //     testC = testC.replace("usernameCookie=", "");
-  //     console.log(testC);
-  //     userInfo.username = testC;
-  //     userInfo.cookieValue = true;
-  //     document.getElementById("username").innerHTML=userInfo.username;
-  }
-  else{
-  //   socket.on('sendUser', function(username){
-  //     console.log("recieving2: "+username);
-  //     document.getElementById("username").innerHTML=username;
-  //     userInfo.username = username;
-  //
-      var tempString = "usernameCookie="+givenUsername+";";
-      console.log(tempString);
-      console.log("cookie:  "+userInfo.username+givenUsername);
-      document.cookie = tempString;
-  //   });
-  //
-  }
-}
+// function checkCookie(givenUsername){
+//   if (document.cookie.split(';').filter((item) => item.trim().startsWith('usernameCookie=')).length) {
+//     var tempString = "usernameCookie="+givenUsername+";";
+//     console.log('The cookie "usernameCookie" exists (ES6): '+tempString);
+//     console.log("cookie:  "+userInfo.username+givenUsername);
+//
+//     document.cookie = tempString;
+//     // var testC = "";
+//     // testC = document.cookie;
+//     // console.log(testC);
+//   //     testC = testC.replace("usernameCookie=", "");
+//   //     console.log(testC);
+//   //     userInfo.username = testC;
+//   //     userInfo.cookieValue = true;
+//   //     document.getElementById("username").innerHTML=userInfo.username;
+//   }
+//   else{
+//   //   socket.on('sendUser', function(username){
+//   //     console.log("recieving2: "+username);
+//   //     document.getElementById("username").innerHTML=username;
+//   //     userInfo.username = username;
+//   //
+//       var tempString = "usernameCookie="+givenUsername+";";
+//       console.log(tempString);
+//       console.log("cookie:  "+userInfo.username+givenUsername);
+//       document.cookie = tempString;
+//   //   });
+//   //
+//   }
+// }
