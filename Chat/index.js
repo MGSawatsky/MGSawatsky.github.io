@@ -23,10 +23,6 @@ var savedUsername;
 var listOfUsers = '';
 var messageList= '';
 var lastUser='';
-// var username = "";
-// app.get('/', function(req, res){
-//   res.sendFile(__dirname + '/index.html');
-// });
 
 function getTime(timestamp){
   var currentDate = new Date();
@@ -88,29 +84,6 @@ app.get('/', function(req, res){
 
 
 io.on('connection', function(socket){
-  // username = '';
-  // socket.on('checkUsername', function(cookieDoc){
-  //
-  //   var cookieVal = getCookie(cookieDoc);
-  //
-  //   if(cookieVal == "" || socket.username == undefined){
-  //     socket.username = "USER"+userCount;
-  //     userCount = userCount+1;
-  //     console.log("USER"+userCount + "::" + username);
-  //   }
-  //   else{
-  //     console.log("COOKIE ALREADY SET");
-  //   }
-  // });
-
-
-  //
-  // socket.username = "USER"+userCount;
-  // while(listOfUsers.includes(socket.username)){
-  //   userCount = userCount+1;
-  //   socket.username = "USER"+userCount;
-  // }
-  // console.log("USER"+userCount + "::" + socket.username);
 
   //method of assigning username on sign in
   socket.username = savedUsername;
@@ -157,7 +130,7 @@ io.on('connection', function(socket){
     }
       else{
         var completeMsg = "<font color=#707070>["+timestamp+"]</font> "+givenUsername+": "+msg;
-        io.emit('chat message', "<font color=#707070>["+timestamp+"]</font> "+givenUsername+": "+msg, givenUsername, givenColor);
+        io.emit('chat message', "<font color=#707070>["+timestamp+"]</font> "+givenUsername+": <fontcolor="+givenColor+">"+msg+"</font>", givenUsername, givenColor, timestamp);
         messageList = messageList.concat('<li>' + completeMsg);
       }
   });
