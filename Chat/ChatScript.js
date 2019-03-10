@@ -15,7 +15,7 @@ function printInfo(){
 
 }
 
-function getTime(timestamp){
+function getClientTime(timecode){
   var currentDate = new Date();
   var date = currentDate.getDate();
   var month = currentDate.getMonth() + 1; //January is 0 not 1

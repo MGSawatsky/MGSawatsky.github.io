@@ -48,10 +48,11 @@
           $('#m').val('');
           return false;
         });
-        socket.on('chat message', function(msg, username, color){
+        socket.on('chat message', function(msg, username, color, timecode){
           var msgString = msg.fontcolor(color);
+          var timestamp = getClientTime(timecode);
           if(username === userInfo.username){
-            msgString = "<b>"+msgString+"</b>";
+            msgString = "<font color=#707070>["+timestamp+"] </font> "+"<b>"+msgString+"</b>";
           }
           $('#messages').append($('<li>' + msgString));
           //checkCookie(userInfo.username);

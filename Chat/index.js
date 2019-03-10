@@ -36,26 +36,6 @@ function getTime(timestamp){
   return timestamp;
 }
 
-/*
-Based off function from w3schools for getting the value of a cookie from the cookie string
-Tutorial URL: https://www.w3schools.com/js/js_cookies.asp
-*/
-function getCookie(cookieDoc) {
-  var name = "usernameCookie=";
-  var decodedCookie = decodeURIComponent(cookieDoc);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
 
 var htmlPath = path.join(__dirname);
 // app.use(express.static(htmlPath));
@@ -97,7 +77,7 @@ io.on('connection', function(socket){
   socket.emit("sendMessageBoard", messageList);
 
   //Sends message to all users with a timestamp
-  socket.on('chat message', function(msg, givenUsername, givenColor){
+  socket.on('chat message', function(msg, givenUsername, givenColor, timecode){
     var timestamp = getTime('timestamp');
     var username = '';
     if(msg.substring(0,10) == "/nickcolor"){
@@ -129,8 +109,10 @@ io.on('connection', function(socket){
       io.emit("userList", listOfUsers);
     }
       else{
-        var completeMsg = "<font color=#707070>["+timestamp+"]</font> "+givenUsername+": "+msg;
-        io.emit('chat message', "<font color=#707070>["+timestamp+"]</font> "+givenUsername+": <fontcolor="+givenColor+">"+msg+"</font>", givenUsername, givenColor, timestamp);
+        //"<font color=#707070>["+timestamp+"]</font> "+
+        var timecode = new Date();
+        var completeMsg = "<font color=#707070>["+timestamp+"]</font> "+givenUsername+": <font color="+givenColor+">"+msg+"</font>";
+        io.emit('chat message', givenUsername+": <font color="+givenColor+">"+msg+"</font>", givenUsername, givenColor, timecode);
         messageList = messageList.concat('<li>' + completeMsg);
       }
   });
