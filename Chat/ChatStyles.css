@@ -54,6 +54,14 @@ form button {
   width: 100%;
   height: 100%;
   overflow-y: auto;
+
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: auto;
+  overflow-y: auto;
+  overflow-wrap: break-word;
 }
 #send-box{
   width: 100%;
@@ -67,11 +75,6 @@ form button {
   list-style-type: none;
   margin: 0;
   padding: 0;
- /* display: flex;
- flex-direction: column-reverse;
- bottom: 0;
- overflow-y: auto;
- justify-content: flex-end; */
 }
 #messages li {
   padding: 5px 10px;
@@ -79,16 +82,6 @@ form button {
 #messages li:nth-child(odd) {
   background: #eee;
 }
-#message-board{
-
-}
 #msg-div{
-  display: flex;
-  height: 100%;
-  bottom: 0 ;
-  flex-direction: column;
-  justify-content: flex-end;
-  overflow: auto;
-  overflow-y: auto;
-  overflow-wrap: break-word;
+
 }

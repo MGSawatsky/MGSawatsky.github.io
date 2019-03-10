@@ -12,7 +12,7 @@
       <ul id="users"></ul>
     </div>
     <div id="message-board">
-      <p>You are <b id="username"></b></p>
+      <p>You are: <b id="username"></b></p>
       <div id=msg-div>
         <ul id="messages"></ul>
       </div>
@@ -26,24 +26,14 @@
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script> -->
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <!-- <script>
-    function toBottom()
-    {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-    window.onload=toBottom;
-    </script> -->
+
     <script>
       $(function () {
         var socket = io();
         var scrollbar = document.getElementById("messages");
-        //socket.emit("checkUsername", document.cookie);
         $('form').submit(function(e){
           e.preventDefault(); // prevents page reloading
           console.log(userInfo.color);
-          // if($('#m').val().substring(0,5) == "/nick"){
-          //   userInfo.cookieValue = false;
-          // }
           socket.emit('chat message', $('#m').val(), userInfo.username, userInfo.color);
           $('#m').val('');
           return false;
@@ -52,12 +42,12 @@
           var msgString = msg.fontcolor(color);
           var timestamp = getClientTime(timecode);
           if(username === userInfo.username){
-            msgString = "<font color=#707070>["+timestamp+"] </font> "+"<b>"+msgString+"</b>";
+            msgString ="<b>"+msgString+"</b>";
           }
+          msgString = "<font color=#707070>["+timestamp+"] </font> "+msgString;
           $('#messages').append($('<li>' + msgString));
-          //checkCookie(userInfo.username);
-          $('#msg-div').scrollTop(9999999);
-          //document.getElementById("username").style.color = color;
+          $('#msg-div').scrollTop(999999999);
+          document.getElementById("username").style.color = color;
           printInfo();
         });
         //updates MessageBoard
@@ -66,15 +56,11 @@
           $('#messages').append(messageList);
         });
         //updates username
-        // if(userInfo.cookieValue === false){
           socket.on('sendUser', function(username){
             console.log("recieving: "+username);
             document.getElementById("username").innerHTML=username;
             userInfo.username = username;
             document.cookie = "cookieUsername="+username;
-            //checkCookie(userInfo.username);
-            // var reply = true;
-            // socket.emit('sendUserReply', reply, userInfo.username);
           });
         // }
 
